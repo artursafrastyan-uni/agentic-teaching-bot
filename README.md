@@ -71,17 +71,3 @@ The core synthesis utilizes strict role-based prompting:
 
 ---
 
-## Evaluation Section
-
-### Test Case 1: Functional Flow (Success)
-- **Input**: A PDF on "Intro to NLP", Command: `/plan 60 minutes undergrads`, `ok` confirmation, `/send artur_safrastyan@edu.aua.am`
-- **Output**: The bot correctly extracted the text, drafted a 60-minute targeted plan for undergrads, grabbed 3 relevant Wikipedia links for NLP, displayed the preview, and successfully fired the email upon user confirmation.
-- **Latency**: ~45 seconds on local hardware.
-
-### Test Case 2: Grounding & Web Search Validation
-- **Input**: The generated plan for the NLP slides heavily focuses on Tokenization and Word Embeddings. The orchestrator isolates the keywords and initiates `/research`.
-- **Output**: The system returned `Wikipedia: Natural language processing`, `Wikipedia: Word embedding`, and successfully provided snippets summarizing each, directly mapped to the slide content claims. No hallucinated links were produced.
-
-### Test Case 3: Failure Handlers (Bad Inputs)
-- **Input**: Uploaded an invalid file (e.g. image or .docx), and attempted to use a malformed email address in the send command (e.g., `/send not_an_email`).
-- **Output**: The bot gracefully rejected the non-PDF file with "Unsupported file format. Please upload a PDF". The bot also regex-caught the bad email, immediately warning: "The provided text does not look like a valid email address." and halted the SMTP dispatcher.
