@@ -41,7 +41,17 @@ async def handle_document(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not document.file_name.lower().endswith('.pdf'):
         await update.message.reply_text('Unsupported file format. Please upload a PDF file containing your lecture slides.')
         return
-    FUN_FACTS = ["Did you know? Adolf Hitler’s opening speech at the 1936 Berlin Olympics is the first high-power television signal to escape Earth's ionosphere, traveling into deep space, meaning if there is life outside earth thats the first thing they'll hear.", "Ioseb Jughashvili was a talented young Georgian poet who wrote poems with romantic and patriotic themes, he later was named Time's person of the year and nominated for the nobel peace prize twice. Some of you might know this lovely gentleman as Stalin.", "Russia's last emperor, Nicholas II, earned the nickname 'Bloody Nicholas' after 1300 people were killed in a stampede during his coronation. The reason the crowd of 500.000 began the stampede were free promise of free bread and sausages.", 'Despite Luxembourg not having a standing army they still resisted Nazi occupation longer than Denmark, who lasted for ~6 hours.', 'The famous fashion designer Coco Chanel who created one of the most iconic looks of the 20th century was a Nazi spy and collaborator.', "On August 6th, 1945, the United States dropped the world's first atomic bomb on Hiroshima, Japan, on August 8th, The USSR declared war on Japan and invaded Manchuria, on August 9th, the United States dropped the world's second atomic bomb on Nagasaki, Japan. Talk about a bad few days."]
+    FUN_FACTS = ["Adolf Hitler’s opening speech at the 1936 Berlin Olympics is the first high-power television signal to escape Earth's ionosphere, traveling into deep space, meaning if there is life outside earth thats the first thing they'll hear.",
+    "Ioseb Jughashvili was a talented young Georgian poet who wrote poems with romantic and patriotic themes, he later was named Time's person of the year and nominated for the nobel peace prize twice. Some of you might know this lovely gentleman as Stalin.",
+    "Russia's last emperor, Nicholas II, earned the nickname 'Bloody Nicholas' after 1300 people were killed in a stampede during his coronation. The reason the crowd of 500.000 began the stampede were free promise of free bread and sausages.", 
+    'Despite Luxembourg not having a standing army they still resisted Nazi occupation longer than Denmark, who lasted for ~6 hours.', 
+    'The famous fashion designer Coco Chanel who created one of the most iconic looks of the 20th century was a Nazi spy and collaborator.',
+    "On August 6th, 1945, the United States dropped the world's first atomic bomb on Hiroshima, Japan, on August 8th, The USSR declared war on Japan and invaded Manchuria, on August 9th, the United States dropped the world's second atomic bomb on Nagasaki, Japan. Talk about a bad few days.",
+    "Fidel Castro had a well-documented and intense obsession with dairy products, particularly milk and ice cream to the point that it affected Cuba's foreign policy. The CIA notoriously tried to poison a chocolate milkshake that Castro ordered at the Havana Libre Hotel in 1961.",
+    "Emil Hácha, the president of Czechoslovakia, suffered a heart attack during a high-stakes meeting with Adolf Hitler on March 15, 1939, in Berlin. Under intense intimidation, including threats from Hermann Göring to bomb Prague, the elderly Hácha collapsed and was revived by Hitler’s personal doctor.",
+    "Winston Churchill occasionally expressed admiration for Hitler's political achievements and vital force in the 1930s, despite recognizing the danger of the Nazi regime. He famously stated in 1937, \"If our country were defeated, I hope we should find a champion as admirable to restore our courage. These remarks focused on Hitler’s ability to resurrect Germany from the Versailles Treaty's aftermath rather than an endorsement of Nazi ideology, reflecting a complex mix of anti-communism and grudging respect for a strong leader.",
+    "At the 1943 Tehran Conference, Stalin proposed executing 50,000–100,000 German officers after the war to ensure Germany could not fight again. Roosevelt joked in response that “maybe 49,000 would be enough,” which outraged Churchill, causing him to storm out before Stalin claimed he was only joking"
+    ]
     fact = random.choice(FUN_FACTS)
     await update.message.reply_text(f'Downloading and parsing slides...\n\n*While you wait, here is a historic fact:*\n{fact}', parse_mode='Markdown')
     file = await context.bot.get_file(document.file_id)
@@ -136,3 +146,6 @@ def main():
     app.add_handler(MessageHandler(filters.Document.PDF, handle_document))
     print('Bot is running! Press Ctrl+C to stop and ruin the fun.')
     app.run_polling()
+
+if __name__ == '__main__':
+    main()
